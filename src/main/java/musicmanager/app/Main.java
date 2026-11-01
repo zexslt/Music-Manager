@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import musicmanager.app.database.JpaSession;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,5 +43,10 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void stop() {
+        JpaSession.close();
     }
 }

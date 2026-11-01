@@ -27,7 +27,7 @@
                      </font>
                   </Label>
                   <Pane HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="145.0" style="-fx-background-color: #7928ca; -fx-text-fill: white; -fx-cursor: hand; -fx-background-radius: 6;" text="+ Добавить группу">
+                  <Button mnemonicParsing="false" onAction="#handleAddBand" prefHeight="35.0" prefWidth="145.0" style="-fx-background-color: #7928ca; -fx-text-fill: white; -fx-cursor: hand; -fx-background-radius: 6;" text="+ Добавить группу">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -36,7 +36,7 @@
             </HBox>
 
 
-            <TextField promptText="🔍 Поиск по названию или жанру..." style="-fx-background-color: #161b2e; -fx-text-fill: white; -fx-prompt-text-fill: #8a99ad; -fx-border-color: #232a42; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10;">
+            <TextField fx:id="searchField" promptText="🔍 Поиск по названию группы..." style="-fx-background-color: #161b2e; -fx-text-fill: white; -fx-prompt-text-fill: #8a99ad; -fx-border-color: #232a42; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10;">
                <font>
                   <Font size="13.0" />
                </font>
@@ -44,10 +44,7 @@
 
             <GridPane fx:id="cardsContainer" hgap="15.0" vgap="15.0" VBox.vgrow="ALWAYS">
                <children>
-                  <fx:include source="band_card.fxml" />
-                  <fx:include source="band_card.fxml" />
-                  <fx:include source="band_card.fxml" />
-                  <fx:include source="band_card.fxml" />
+                  <Label fx:id="emptyLabel" text="Загрузка групп..." visible="false" managed="false" style="-fx-text-fill: #8a99ad; -fx-font-size: 14px;" />
                </children>
             </GridPane>
 

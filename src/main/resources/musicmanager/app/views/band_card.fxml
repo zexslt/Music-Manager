@@ -12,7 +12,7 @@
                     <children>
                         <VBox alignment="CENTER" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #7928ca; -fx-background-radius: 8;">
                             <children>
-                                <Label text="LP" textFill="WHITE">
+                                <Label fx:id="initialsLabel" text="LP" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="15.0" />
                                     </font>
@@ -22,12 +22,12 @@
 
                         <VBox spacing="2.0" HBox.hgrow="ALWAYS">
                             <children>
-                                <Label text="Linkin Park" textFill="WHITE">
+                                <Label fx:id="nameLabel" text="Linkin Park" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="16.0" />
                                     </font>
                                 </Label>
-                                <Label text="Alternative Rock / Nu Metal" textFill="#8a99ad">
+                                <Label fx:id="subtitleLabel" text="Основана: 1996 г." textFill="#8a99ad">
                                     <font>
                                         <Font size="11.0" />
                                     </font>
@@ -35,7 +35,7 @@
                             </children>
                         </VBox>
 
-                        <Label style="-fx-background-color: #0d2a1d; -fx-background-radius: 15; -fx-padding: 4 10 4 10;" text="● В туре" textFill="#00ff88">
+                        <Label fx:id="tourStatusLabel" style="-fx-background-color: #0d2a1d; -fx-background-radius: 15; -fx-padding: 4 10 4 10;" text="● В туре" textFill="#00ff88">
                             <font>
                                 <Font size="11.0" />
                             </font>
@@ -52,7 +52,7 @@
                                         <Font size="10.0" />
                                     </font>
                                 </Label>
-                                <Label text="6 участников" textFill="WHITE">
+                                <Label fx:id="membersLabel" text="6 участников" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="13.0" />
                                     </font>
@@ -66,7 +66,7 @@
                                         <Font size="10.0" />
                                     </font>
                                 </Label>
-                                <Label text="39 100 000 ₽" textFill="#00e5ff">
+                                <Label fx:id="averageRevenueLabel" text="39 100 000 ₽" textFill="#00e5ff">
                                     <font>
                                         <Font name="System Bold" size="13.0" />
                                     </font>
@@ -83,7 +83,7 @@
                                 <Font size="11.0" />
                             </font>
                         </Label>
-                        <Label text="📅 3 ноября • Лос-Анджелес (Kia Forum)" textFill="WHITE">
+                        <Label fx:id="nextTourLabel" text="Ближайший тур" textFill="WHITE" wrapText="true">
                             <font>
                                 <Font size="12.0" />
                             </font>
@@ -93,8 +93,8 @@
 
                 <HBox alignment="CENTER_RIGHT" spacing="10.0">
                     <children>
-                        <Button mnemonicParsing="false" style="-fx-background-color: #2a324b; -fx-text-fill: white; -fx-background-radius: 6px; -fx-padding: 6px 12px; -fx-cursor: hand;" text="✏ Редактировать" />
-                        <Button mnemonicParsing="false" style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-background-radius: 6px; -fx-padding: 6px 12px; -fx-cursor: hand;" text="🗑 Удалить" />
+                        <Button mnemonicParsing="false" onAction="#handleEditBand" style="-fx-background-color: #2a324b; -fx-text-fill: white; -fx-background-radius: 6px; -fx-padding: 6px 12px; -fx-cursor: hand;" text="✏ Редактировать" />
+                        <Button mnemonicParsing="false" onAction="#handleDeleteBand" style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-background-radius: 6px; -fx-padding: 6px 12px; -fx-cursor: hand;" text="🗑 Удалить" />
                     </children>
                 </HBox>
             </children>

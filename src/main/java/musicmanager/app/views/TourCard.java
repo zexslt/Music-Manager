@@ -1,44 +1,70 @@
 package musicmanager.app.views;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import musicmanager.app.models.Tour;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 public class TourCard implements Initializable {
+    @FXML private VBox rootPane;
+    @FXML private Label bandNameLabel;
+    @FXML private Label tourNameLabel;
+    @FXML private Label statusLabel;
+    @FXML private Label cityCountLabel;
+    @FXML private Label revenueLabel;
 
-    @FXML
-    private VBox rootPane;
+    private Tour tour;
+    private Consumer<Tour> editAction;
+    private Consumer<Tour> deleteAction;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (rootPane != null) {
-            rootPane.setOnMouseClicked(this::openTourInfo);
-        }
+        rootPane.setOnMouseClicked(this::openTourInfo);
+    }
+
+    public void setTour(Tour tour) {
+        this.tour = tour;
+        bandNameLabel.setText(tour.getMusicBand().getName());
+        tourNameLabel.setText(tour.getStatus());
+        statusLabel.setText("● " + tour.getStatus());
+        int cityCount = tour.getCities().size();
+        int lastTwoDigits = cityCount % 100;
+        String cityWord = lastTwoDigits >= 11 && lastTwoDigits <= 14 ? "городов"
+                : switch (cityCount % 10) {
+                    case 1 -> "город";
+                    case 2, 3, 4 -> "города";
+                    default -> "городов";
+                };
+        cityCountLabel.setText(cityCount + " " + cityWord);
+        revenueLabel.setText(NumberFormat.getIntegerInstance(Locale.forLanguageTag("ru-RU")).format(tour.getRevenue()) + " ₽");
+    }
+
+    public void setActions(Consumer<Tour> editAction, Consumer<Tour> deleteAction) {
+        this.editAction = editAction;
+        this.deleteAction = deleteAction;
     }
 
     private void openTourInfo(MouseEvent event) {
+        if (tour == null || event.getTarget() instanceof javafx.scene.control.Button) return;
         try {
-            URL fxmlUrl = getClass().getResource("tour_info.fxml");
-            if (fxmlUrl == null) {
-                System.err.println("Не удалось найти файл tour_info.fxml!");
-                return;
-            }
-
-            FXMLLoader loader = new FXMLLoader(fxmlUrl);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("tour_info.fxml"));
             AnchorPane pane = loader.load();
-
-            Node source = (Node) event.getSource();
+            ((TourInfo) loader.getController()).setTour(tour);
+            Node source = rootPane;
             AnchorPane contentArea = (AnchorPane) source.getScene().lookup("#contentArea");
-
             if (contentArea != null) {
                 contentArea.getChildren().setAll(pane);
                 AnchorPane.setTopAnchor(pane, 0.0);
@@ -47,23 +73,27 @@ public class TourCard implements Initializable {
                 AnchorPane.setRightAnchor(pane, 0.0);
             }
         } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Ошибка навигации");
-            alert.setHeaderText("Не удалось открыть информацию о туре");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            showError("Не удалось открыть информацию о туре", e);
         }
     }
 
     @FXML
     private void handleEditTour(javafx.event.ActionEvent event) {
         event.consume();
-        System.out.println("Редактировать тур");
+        if (tour != null && editAction != null) editAction.accept(tour);
     }
 
     @FXML
     private void handleDeleteTour(javafx.event.ActionEvent event) {
         event.consume();
-        System.out.println("Удалить тур");
+        if (tour != null && deleteAction != null) deleteAction.accept(tour);
+    }
+
+    private void showError(String header, Exception exception) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Ошибка навигации");
+        alert.setHeaderText(header);
+        alert.setContentText(exception.getMessage());
+        alert.showAndWait();
     }
 }

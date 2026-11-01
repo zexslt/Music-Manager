@@ -50,7 +50,7 @@ public class MusicBand {
 
 
 
-    @Transient
+    @OneToMany(mappedBy = "musicBand", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Track> getTracks() {
         return tracks;
     }
@@ -58,7 +58,7 @@ public class MusicBand {
         this.tracks = tracks;
     }
 
-    @Transient
+    @OneToMany(mappedBy = "musicBand", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Musician> getMusicians() {
         return musicians;
     }
@@ -66,7 +66,7 @@ public class MusicBand {
         this.musicians = musicians;
     }
 
-    @Transient
+    @OneToMany(mappedBy = "musicBand", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Tour> getTours() {
         return tours;
     }

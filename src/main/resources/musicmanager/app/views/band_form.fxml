@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="rootPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #0f111a;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="musicmanager.app.views.BandForm">
+    <children>
+        <VBox spacing="12" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <padding><Insets bottom="25" left="25" right="25" top="20" /></padding>
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <Button onAction="#handleCancel" style="-fx-background-color: #161b2e; -fx-text-fill: white; -fx-border-color: #232a42; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 9 14;" text="← Назад" />
+                    <Label fx:id="titleLabel" style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;" text="Добавить группу" />
+                    <Pane HBox.hgrow="ALWAYS" />
+                    <Button onAction="#handleSave" style="-fx-background-color: #7928ca; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 9 18;" text="Сохранить" />
+                </HBox>
+                <ScrollPane fitToWidth="true" style="-fx-background: #0f111a; -fx-background-color: #0f111a; -fx-border-color: #0f111a;" VBox.vgrow="ALWAYS">
+                    <content>
+                        <VBox spacing="16" style="-fx-background-color: #0f111a;">
+                            <children>
+                                <VBox spacing="10" style="-fx-background-color: #161b2e; -fx-background-radius: 8; -fx-border-color: #232a42; -fx-border-radius: 8; -fx-padding: 18;">
+                                    <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Основные данные" />
+                                    <Label style="-fx-text-fill: #8a99ad;" text="Название группы *" />
+                                    <TextField fx:id="nameField" promptText="Название (до 45 символов)" />
+                                    <HBox spacing="12">
+                                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                            <Label style="-fx-text-fill: #8a99ad;" text="Дата основания (год) *" />
+                                            <TextField fx:id="yearField" promptText="Например, 1996" />
+                                        </VBox>
+                                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                            <Label style="-fx-text-fill: #8a99ad;" text="Место в чарте *" />
+                                            <TextField fx:id="topPositionField" promptText="Например, 1" />
+                                        </VBox>
+                                    </HBox>
+                                    <Label style="-fx-text-fill: #738098; -fx-font-size: 11px;" text="* Обязательные поля. " wrapText="true" />
+                                </VBox>
+
+                                <VBox spacing="10" style="-fx-background-color: #161b2e; -fx-background-radius: 8; -fx-border-color: #232a42; -fx-border-radius: 8; -fx-padding: 18;">
+                                    <HBox alignment="CENTER_LEFT" spacing="10">
+                                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Музыканты *" />
+                                        <Pane HBox.hgrow="ALWAYS" />
+                                        <Button onAction="#handleAddMusician" style="-fx-background-color: #252a3a; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 7 12;" text="+ Добавить музыканта" />
+                                    </HBox>
+                                    <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 11px;" text="Добавьте минимум одного музыканта. Имя, фамилия и возраст обязательны; роль можно оставить пустой." wrapText="true" />
+                                    <VBox fx:id="musiciansContainer" spacing="8" />
+                                </VBox>
+
+                                <VBox spacing="10" style="-fx-background-color: #161b2e; -fx-background-radius: 8; -fx-border-color: #232a42; -fx-border-radius: 8; -fx-padding: 18;">
+                                    <HBox alignment="CENTER_LEFT" spacing="10">
+                                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Треки" />
+                                        <Pane HBox.hgrow="ALWAYS" />
+                                        <Button onAction="#handleAddTrack" style="-fx-background-color: #252a3a; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 7 12;" text="+ Добавить трек" />
+                                    </HBox>
+                                    <VBox fx:id="tracksContainer" spacing="8" />
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

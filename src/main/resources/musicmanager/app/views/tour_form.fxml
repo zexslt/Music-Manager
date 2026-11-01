@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="rootPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #0f111a;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="musicmanager.app.views.TourForm">
+    <children>
+        <VBox spacing="12" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0">
+            <padding><Insets top="20" right="25" bottom="25" left="25" /></padding>
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <Button text="← Назад" onAction="#handleCancel" style="-fx-background-color: #161b2e; -fx-text-fill: white; -fx-border-color: #232a42; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 9 14;" />
+                    <Label fx:id="titleLabel" text="Добавить тур" style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;" />
+                    <Pane HBox.hgrow="ALWAYS" />
+                    <Button text="Сохранить" onAction="#handleSave" style="-fx-background-color: #7928ca; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 9 18;" />
+                </HBox>
+                <ScrollPane fitToWidth="true" style="-fx-background: #0f111a; -fx-background-color: #0f111a; -fx-border-color: #0f111a;" VBox.vgrow="ALWAYS">
+                    <content>
+                        <VBox spacing="16" style="-fx-background-color: #0f111a;">
+                            <children>
+                                <VBox spacing="10" style="-fx-background-color: #161b2e; -fx-background-radius: 8; -fx-border-color: #232a42; -fx-border-radius: 8; -fx-padding: 18;">
+                                    <Label text="Основные данные" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" />
+                                    <HBox spacing="12">
+                                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                            <Label text="Название / статус тура *" style="-fx-text-fill: #8a99ad;" />
+                                            <TextField fx:id="statusField" promptText="Например, Летний тур" />
+                                        </VBox>
+                                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                            <Label text="Выручка *" style="-fx-text-fill: #8a99ad;" />
+                                            <TextField fx:id="revenueField" promptText="Сумма в целых числах" />
+                                        </VBox>
+                                    </HBox>
+                                    <Label text="Группа *" style="-fx-text-fill: #8a99ad;" />
+                                    <ComboBox fx:id="bandBox" maxWidth="Infinity" promptText="Выберите группу" />
+                                </VBox>
+
+                                <VBox spacing="10" style="-fx-background-color: #161b2e; -fx-background-radius: 8; -fx-border-color: #232a42; -fx-border-radius: 8; -fx-padding: 18;">
+                                    <HBox alignment="CENTER_LEFT" spacing="10">
+                                        <Label text="Города тура" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" />
+                                        <Pane HBox.hgrow="ALWAYS" />
+                                        <Button text="+ Добавить город" onAction="#handleAddCityRow" style="-fx-background-color: #252a3a; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 7 12;" />
+                                        <Button text="Города справочника" onAction="#handleOpenCityWindow" style="-fx-background-color: #252a3a; -fx-text-fill: #00e5ff; -fx-background-radius: 6; -fx-padding: 7 12;" />
+                                    </HBox>
+                                    <Label text="Введите названия городов. Если город уже есть в другом туре, приложение использует существующий city_id." wrapText="true" style="-fx-text-fill: #8a99ad; -fx-font-size: 11px;" />
+                                    <VBox fx:id="citiesContainer" spacing="8" />
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

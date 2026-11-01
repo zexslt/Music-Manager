@@ -11,12 +11,12 @@
             <children>
                 <VBox spacing="2.0" HBox.hgrow="ALWAYS">
                     <children>
-                        <Label text="Linkin Park" textFill="#8a99ad">
+                        <Label fx:id="bandNameLabel" text="Linkin Park" textFill="#8a99ad">
                             <font>
                                 <Font size="11.0" />
                             </font>
                         </Label>
-                        <Label text="From Zero World Tour" textFill="WHITE">
+                        <Label fx:id="tourNameLabel" text="From Zero World Tour" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="15.0" />
                             </font>
@@ -25,7 +25,7 @@
                 </VBox>
 
                 <!-- Статус бейдж -->
-                <Label style="-fx-background-color: #0d2a1d; -fx-background-radius: 15; -fx-padding: 4 10 4 10;" text="● Активен" textFill="#00ff88">
+                <Label fx:id="statusLabel" style="-fx-background-color: #0d2a1d; -fx-background-radius: 15; -fx-padding: 4 10 4 10;" text="● Активен" textFill="#00ff88">
                     <font>
                         <Font size="11.0" />
                     </font>
@@ -42,7 +42,7 @@
                                 <Font size="10.0" />
                             </font>
                         </Label>
-                        <Label text="12 городов" textFill="WHITE">
+                        <Label fx:id="cityCountLabel" text="12 городов" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
@@ -56,7 +56,7 @@
                                 <Font size="10.0" />
                             </font>
                         </Label>
-                        <Label text="39 100 000 ₽" textFill="#00e5ff">
+                        <Label fx:id="revenueLabel" text="39 100 000 ₽" textFill="#00e5ff">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>

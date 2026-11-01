@@ -85,12 +85,12 @@
 
                 <VBox spacing="12.0" style="-fx-background-color: #161b2e; -fx-background-radius: 10; -fx-border-color: #232a42; -fx-border-radius: 10; -fx-padding: 20;" VBox.vgrow="ALWAYS">
                     <children>
-                        <Label text="Список городов и дат" textFill="WHITE">
+                        <Label text="Города тура" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="16.0" />
                             </font>
                         </Label>
-                        <Label text="• 03 ноября — Лос-Анджелес (Kia Forum)&#10;• 08 ноября — Лондон (The O2 Arena)&#10;• 13 ноября — Париж (La Défense Arena)" textFill="#d1d5db">
+                        <Label fx:id="citiesDetailLabel" text="Города тура" textFill="#d1d5db" wrapText="true">
                             <font>
                                 <Font size="14.0" />
                             </font>
