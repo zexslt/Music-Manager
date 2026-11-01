@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #0f111a;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="musicmanager.app.views.BandInfo" stylesheets="@../styles/style.css">
+    <children>
+        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+
+                <HBox alignment="CENTER_LEFT" prefHeight="50.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: #161b2e; -fx-text-fill: white; -fx-cursor: hand; -fx-border-color: #232a42; -fx-border-radius: 6; -fx-background-radius: 6;" text="← Назад к списку" />
+                        <Pane HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" style="-fx-background-color: #7928ca; -fx-text-fill: white; -fx-cursor: hand; -fx-background-radius: 6;" text="Редактировать группу" />
+                    </children>
+                    <padding>
+                        <Insets bottom="10.0" left="25.0" right="25.0" top="20.0" />
+                    </padding>
+                </HBox>
+
+                <ScrollPane fitToWidth="true" style="-fx-background: #0f111a; -fx-background-color: #0f111a; -fx-border-color: #0f111a;" VBox.vgrow="ALWAYS">
+                    <content>
+                        <VBox spacing="20.0" style="-fx-background-color: #0f111a;">
+                            <padding>
+                                <Insets bottom="25.0" left="25.0" right="25.0" top="10.0" />
+                            </padding>
+                            <children>
+
+                                <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: #161b2e; -fx-background-radius: 8; -fx-padding: 20; -fx-border-color: #232a42; -fx-border-radius: 8;">
+                                    <children>
+                                        <Circle fill="#232a42" radius="40.0" stroke="#7928ca" strokeWidth="2" />
+                                        <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;" text="Linkin Park" />
+                                                        <Label style="-fx-background-color: #2b1d0d; -fx-background-radius: 12; -fx-padding: 3 10 3 10; -fx-text-fill: #ffaa00; -fx-font-size: 12px; -fx-font-weight: bold;" text="🏆 Top Chart: #1" />
+                                                    </children>
+                                                </HBox>
+                                                <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 12px;" text="Alternative Rock / Nu Metal | Основана: 1996 г. (США)" />
+                                                <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 12px;" text="Статус: Активный гастрольный период (From Zero World Tour)" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+
+                                <VBox spacing="10.0">
+                                    <children>
+                                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Музыканты (Состав)" />
+
+                                        <HBox spacing="15.0">
+                                            <children>
+                                                <VBox spacing="4.0" style="-fx-background-color: #161b2e; -fx-background-radius: 8; -fx-border-color: #232a42; -fx-border-radius: 8; -fx-padding: 15;" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="Майк Шинода" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 11px;" text="Основатель группы" />
+                                                        <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 11px;" text="Роль: Вокал / Ритм-гитара / Семплинг" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="4.0" style="-fx-background-color: #161b2e; -fx-background-radius: 8; -fx-border-color: #232a42; -fx-border-radius: 8; -fx-padding: 15;" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="Эмили Арминд" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 11px;" text="В составе с 2024 года" />
+                                                        <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 11px;" text="Роль: Главный вокал" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+
+                                        <HBox spacing="15.0">
+                                            <children>
+                                                <VBox spacing="4.0" style="-fx-background-color: #161b2e; -fx-background-radius: 8; -fx-border-color: #232a42; -fx-border-radius: 8; -fx-padding: 15;" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="Брэд Дэлсон" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 11px;" text="Основатель группы" />
+                                                        <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 11px;" text="Роль: Соло-гитара" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="4.0" style="-fx-background-color: #161b2e; -fx-background-radius: 8; -fx-border-color: #232a42; -fx-border-radius: 8; -fx-padding: 15;" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="Дэйв «Феникс» Фаррелл" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 11px;" text="В составе с 1996–1998, 2001" />
+                                                        <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 11px;" text="Роль: Бас-гитара / Бэк-вокал" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+
+                                        <HBox spacing="15.0">
+                                            <children>
+                                                <VBox spacing="4.0" style="-fx-background-color: #161b2e; -fx-background-radius: 8; -fx-border-color: #232a42; -fx-border-radius: 8; -fx-padding: 15;" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="Джо Хан" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 11px;" text="Основатель группы" />
+                                                        <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 11px;" text="Роль: Диджей / Семплинг / Программирование" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="4.0" style="-fx-background-color: #161b2e; -fx-background-radius: 8; -fx-border-color: #232a42; -fx-border-radius: 8; -fx-padding: 15;" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="Колин Бриттейн" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 11px;" text="В составе с 2024 года" />
+                                                        <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 11px;" text="Роль: Ударные / Перкуссия" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+
+                                        <HBox spacing="15.0">
+                                            <children>
+                                                <VBox spacing="4.0" style="-fx-background-color: #161b2e; -fx-background-radius: 8; -fx-border-color: #232a42; -fx-border-radius: 8; -fx-padding: 15;" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="Честер Беннингтон ✝" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 11px;" text="1999–2017 (Легендарный фронтмен)" />
+                                                        <Label style="-fx-text-fill: #ffaa00; -fx-font-size: 11px;" text="Роль: Главный вокал" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="10.0">
+                                    <children>
+                                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Туры (Активные и проведенные)" />
+
+                                        <VBox spacing="4.0" style="-fx-background-color: #161b2e; -fx-background-radius: 8; -fx-border-color: #232a42; -fx-border-radius: 8; -fx-padding: 15;">
+                                            <children>
+                                                <HBox>
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="From Zero World Tour (Текущий тур)" />
+                                                        <Pane HBox.hgrow="ALWAYS" />
+                                                        <Label style="-fx-text-fill: #00ff88; -fx-font-size: 12px;" text="● Активен" />
+                                                    </children>
+                                                </HBox>
+                                                <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 12px;" text="Площадки: Kia Forum (Лос-Анджелес), The O2 (Лондон), La Défense Arena (Париж)" />
+                                            </children>
+                                        </VBox>
+
+                                        <VBox spacing="4.0" style="-fx-background-color: #161b2e; -fx-background-radius: 8; -fx-border-color: #232a42; -fx-border-radius: 8; -fx-padding: 15;">
+                                            <children>
+                                                <HBox>
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="Meteora Anniversary Tour" />
+                                                        <Pane HBox.hgrow="ALWAYS" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 12px;" text="✔ Проведен" />
+                                                    </children>
+                                                </HBox>
+                                                <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 12px;" text="Площадки: Мировые фестивальные арены" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="10.0">
+                                    <children>
+                                        <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Треки (10 главных хитов)" />
+                                        <VBox spacing="8.0">
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #161b2e; -fx-background-radius: 6; -fx-padding: 10 15 10 15; -fx-border-color: #232a42; -fx-border-radius: 6;">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold;" text="1. In the End" />
+                                                        <Pane HBox.hgrow="ALWAYS" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 12px;" text="Hybrid Theory" />
+                                                        <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 12px;" text="  •  3:36" />
+                                                    </children>
+                                                </HBox>
+
+                                                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #161b2e; -fx-background-radius: 6; -fx-padding: 10 15 10 15; -fx-border-color: #232a42; -fx-border-radius: 6;">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold;" text="2. Numb" />
+                                                        <Pane HBox.hgrow="ALWAYS" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 12px;" text="Meteora" />
+                                                        <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 12px;" text="  •  3:07" />
+                                                    </children>
+                                                </HBox>
+
+                                                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #161b2e; -fx-background-radius: 6; -fx-padding: 10 15 10 15; -fx-border-color: #232a42; -fx-border-radius: 6;">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold;" text="3. Crawling" />
+                                                        <Pane HBox.hgrow="ALWAYS" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 12px;" text="Hybrid Theory" />
+                                                        <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 12px;" text="  •  3:29" />
+                                                    </children>
+                                                </HBox>
+
+                                                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #161b2e; -fx-background-radius: 6; -fx-padding: 10 15 10 15; -fx-border-color: #232a42; -fx-border-radius: 6;">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold;" text="4. What I've Done" />
+                                                        <Pane HBox.hgrow="ALWAYS" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 12px;" text="Minutes to Midnight" />
+                                                        <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 12px;" text="  •  3:25" />
+                                                    </children>
+                                                </HBox>
+
+                                                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #161b2e; -fx-background-radius: 6; -fx-padding: 10 15 10 15; -fx-border-color: #232a42; -fx-border-radius: 6;">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold;" text="5. Faint" />
+                                                        <Pane HBox.hgrow="ALWAYS" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 12px;" text="Meteora" />
+                                                        <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 12px;" text="  •  2:42" />
+                                                    </children>
+                                                </HBox>
+
+                                                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #161b2e; -fx-background-radius: 6; -fx-padding: 10 15 10 15; -fx-border-color: #232a42; -fx-border-radius: 6;">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold;" text="6. Papercut" />
+                                                        <Pane HBox.hgrow="ALWAYS" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 12px;" text="Hybrid Theory" />
+                                                        <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 12px;" text="  •  3:04" />
+                                                    </children>
+                                                </HBox>
+
+                                                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #161b2e; -fx-background-radius: 6; -fx-padding: 10 15 10 15; -fx-border-color: #232a42; -fx-border-radius: 6;">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold;" text="7. New Divide" />
+                                                        <Pane HBox.hgrow="ALWAYS" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 12px;" text="Transformers OST" />
+                                                        <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 12px;" text="  •  4:28" />
+                                                    </children>
+                                                </HBox>
+
+                                                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #161b2e; -fx-background-radius: 6; -fx-padding: 10 15 10 15; -fx-border-color: #232a42; -fx-border-radius: 6;">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold;" text="8. Bleed It Out" />
+                                                        <Pane HBox.hgrow="ALWAYS" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 12px;" text="Minutes to Midnight" />
+                                                        <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 12px;" text="  •  2:44" />
+                                                    </children>
+                                                </HBox>
+
+                                                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #161b2e; -fx-background-radius: 6; -fx-padding: 10 15 10 15; -fx-border-color: #232a42; -fx-border-radius: 6;">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold;" text="9. Breaking the Habit" />
+                                                        <Pane HBox.hgrow="ALWAYS" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 12px;" text="Meteora" />
+                                                        <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 12px;" text="  •  3:16" />
+                                                    </children>
+                                                </HBox>
+
+                                                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #161b2e; -fx-background-radius: 6; -fx-padding: 10 15 10 15; -fx-border-color: #232a42; -fx-border-radius: 6;">
+                                                    <children>
+                                                        <Label style="-fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold;" text="10. The Emptiness Machine" />
+                                                        <Pane HBox.hgrow="ALWAYS" />
+                                                        <Label style="-fx-text-fill: #8a99ad; -fx-font-size: 12px;" text="From Zero" />
+                                                        <Label style="-fx-text-fill: #00e5ff; -fx-font-size: 12px;" text="  •  3:10" />
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

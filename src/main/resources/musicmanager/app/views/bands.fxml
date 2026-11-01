@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #0f111a;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="musicmanager.app.views.Bands">
+   <children>
+      <VBox prefHeight="700.0" prefWidth="900.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+
+            <!-- Шапка раздела -->
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0">
+               <children>
+                  <Label text="Управление группами" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Label>
+                  <Pane HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="145.0" style="-fx-background-color: #7928ca; -fx-text-fill: white; -fx-cursor: hand; -fx-background-radius: 6;" text="+ Добавить группу">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+
+
+            <TextField promptText="🔍 Поиск по названию или жанру..." style="-fx-background-color: #161b2e; -fx-text-fill: white; -fx-prompt-text-fill: #8a99ad; -fx-border-color: #232a42; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10;">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+
+            <GridPane fx:id="cardsContainer" hgap="15.0" vgap="15.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <fx:include source="band_card.fxml" />
+                  <fx:include source="band_card.fxml" />
+                  <fx:include source="band_card.fxml" />
+                  <fx:include source="band_card.fxml" />
+               </children>
+            </GridPane>
+
+         </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

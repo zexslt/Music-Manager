@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" minHeight="150.0" minWidth="200.0" prefHeight="150.0" style="-fx-background-color: #161b2e; -fx-background-radius: 8; -fx-border-color: #232a42; -fx-border-radius: 8;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #7928ca; -fx-background-radius: 6;">
+            <children>
+                <Label text="НОЯ" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="9.0" />
+                    </font>
+                </Label>
+                <Label text="08" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+            </children>
+        </VBox>
+
+        <Label layoutX="76.0" layoutY="14.0" text="Linkin Park" textFill="#8a99ad">
+            <font>
+                <Font size="10.0" />
+            </font>
+        </Label>
+        <Label layoutX="76.0" layoutY="28.0" text="From Zero World Tour" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="14.0" layoutY="78.0" text="Площадка:" textFill="#8a99ad">
+            <font>
+                <Font size="11.0" />
+            </font>
+        </Label>
+        <Label layoutX="14.0" layoutY="95.0" text="The O2 Arena, Лондон" textFill="#e2e8f0">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="14.0" layoutY="121.0" textFill="#00e5ff">
+            <font>
+                <Font size="11.0" />
+            </font>
+        </Label>
+    </children>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </padding>
+</AnchorPane>

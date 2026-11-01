@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="900.0" prefHeight="640.0" prefWidth="1024.0" style="-fx-background-color: #121522" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="musicmanager.app.views.MainWindow">
+    <items>
+        <VBox maxWidth="250.0" minWidth="250.0" prefWidth="250.0" spacing="6.0" style="-fx-background-color: #121522;">
+            <children>
+                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="50.0" text="🎵 MUSICMANAGER" textFill="#00e5ff">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Label>
+
+                <Separator prefWidth="200.0" style="-fx-opacity: 0.3;" />
+
+                <Button fx:id="btnOverview" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleShowOverview" styleClass="sidebar-button" text="📊  Обзор" />
+                <Button fx:id="btnBands" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleShowBands" styleClass="sidebar-button" text="🎸  Группы" />
+                <Button fx:id="btnTours" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleShowTours" styleClass="sidebar-button" text="✈  Туры и концерты" />
+
+                <Pane VBox.vgrow="ALWAYS" />
+
+                <Separator prefWidth="200.0" style="-fx-opacity: 0.3;" />
+                <Button fx:id="btnSettings" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleShowSettings" styleClass="sidebar-button" text="⚙  Настройки" />
+            </children>
+            <padding>
+                <Insets bottom="15.0" left="12.0" right="12.0" top="15.0" />
+            </padding>
+        </VBox>
+
+        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+            <content>
+                <AnchorPane fx:id="contentArea" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0f111a;" />
+            </content>
+        </ScrollPane>
+    </items>
+</SplitPane>

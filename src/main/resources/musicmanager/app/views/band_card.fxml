@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="rootPane" style="-fx-background-color: #161b2e; -fx-background-radius: 10; -fx-border-color: #232a42; -fx-border-radius: 10; -fx-padding: 20;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="musicmanager.app.views.BandCard">
+    <children>
+        <VBox spacing="15.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="15.0">
+                    <children>
+                        <VBox alignment="CENTER" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #7928ca; -fx-background-radius: 8;">
+                            <children>
+                                <Label text="LP" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label text="Linkin Park" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label text="Alternative Rock / Nu Metal" textFill="#8a99ad">
+                                    <font>
+                                        <Font size="11.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <Label style="-fx-background-color: #0d2a1d; -fx-background-radius: 15; -fx-padding: 4 10 4 10;" text="● В туре" textFill="#00ff88">
+                            <font>
+                                <Font size="11.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+
+                <HBox style="-fx-background-color: #0f111a; -fx-background-radius: 8; -fx-padding: 12; -fx-border-color: #232a42; -fx-border-radius: 8;">
+                    <children>
+                        <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label text="Состав" textFill="#8a99ad">
+                                    <font>
+                                        <Font size="10.0" />
+                                    </font>
+                                </Label>
+                                <Label text="6 участников" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label text="Гонорар (средний)" textFill="#8a99ad">
+                                    <font>
+                                        <Font size="10.0" />
+                                    </font>
+                                </Label>
+                                <Label text="39 100 000 ₽" textFill="#00e5ff">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <VBox spacing="4.0">
+                    <children>
+                        <Label text="Ближайшие события" textFill="#8a99ad">
+                            <font>
+                                <Font size="11.0" />
+                            </font>
+                        </Label>
+                        <Label text="📅 3 ноября • Лос-Анджелес (Kia Forum)" textFill="WHITE">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+
+                <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                    <children>
+                        <Button mnemonicParsing="false" style="-fx-background-color: #2a324b; -fx-text-fill: white; -fx-background-radius: 6px; -fx-padding: 6px 12px; -fx-cursor: hand;" text="✏ Редактировать" />
+                        <Button mnemonicParsing="false" style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-background-radius: 6px; -fx-padding: 6px 12px; -fx-cursor: hand;" text="🗑 Удалить" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

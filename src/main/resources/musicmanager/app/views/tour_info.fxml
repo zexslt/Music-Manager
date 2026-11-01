@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #0f111a;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="musicmanager.app.views.TourInfo">
+    <children>
+        <VBox prefHeight="700.0" prefWidth="900.0" spacing="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+
+                <HBox alignment="CENTER_LEFT" prefHeight="50.0" spacing="15.0">
+                    <children>
+                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBack" prefHeight="35.0" prefWidth="80.0" style="-fx-background-color: #161b2e; -fx-text-fill: white; -fx-cursor: hand; -fx-background-radius: 6; -fx-border-color: #232a42; -fx-border-radius: 6;" text="← Назад" />
+
+                        <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label fx:id="tourNameLabel" text="From Zero World Tour" textFill="WHITE" wrapText="true">
+                                    <font>
+                                        <Font name="System Bold" size="22.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="bandNameLabel" text="Группа: Linkin Park" textFill="#8a99ad">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <Label fx:id="statusLabel" style="-fx-background-color: #0d2a1d; -fx-background-radius: 15; -fx-padding: 6 14 6 14;" text="● Активен" textFill="#00ff88">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+
+                <HBox spacing="15.0">
+                    <children>
+                        <AnchorPane style="-fx-background-color: #161b2e; -fx-background-radius: 10; -fx-border-color: #232a42; -fx-border-radius: 10; -fx-padding: 20;" HBox.hgrow="ALWAYS">
+                            <children>
+                                <VBox spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <Label text="Города / Концерты" textFill="#8a99ad">
+                                            <font>
+                                                <Font size="12.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="citiesLabel" text="12 городов" textFill="WHITE">
+                                            <font>
+                                                <Font name="System Bold" size="18.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+
+                        <AnchorPane style="-fx-background-color: #161b2e; -fx-background-radius: 10; -fx-border-color: #232a42; -fx-border-radius: 10; -fx-padding: 20;" HBox.hgrow="ALWAYS">
+                            <children>
+                                <VBox spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <Label text="Общая выручка" textFill="#8a99ad">
+                                            <font>
+                                                <Font size="12.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="revenueLabel" text="39 100 000 ₽" textFill="#00e5ff">
+                                            <font>
+                                                <Font name="System Bold" size="18.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </HBox>
+
+                <VBox spacing="12.0" style="-fx-background-color: #161b2e; -fx-background-radius: 10; -fx-border-color: #232a42; -fx-border-radius: 10; -fx-padding: 20;" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Label text="Список городов и дат" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <Label text="• 03 ноября — Лос-Анджелес (Kia Forum)&#10;• 08 ноября — Лондон (The O2 Arena)&#10;• 13 ноября — Париж (La Défense Arena)" textFill="#d1d5db">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+
+            </children>
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+        </VBox>
+    </children>
+</AnchorPane>

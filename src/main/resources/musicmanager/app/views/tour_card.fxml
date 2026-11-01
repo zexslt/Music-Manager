@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="rootPane" maxWidth="Infinity" style="-fx-background-color: #161b2e; -fx-background-radius: 10; -fx-border-color: #232a42; -fx-border-radius: 10; -fx-padding: 15;" spacing="15.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="musicmanager.app.views.TourCard">
+    <children>
+
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <children>
+                <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label text="Linkin Park" textFill="#8a99ad">
+                            <font>
+                                <Font size="11.0" />
+                            </font>
+                        </Label>
+                        <Label text="From Zero World Tour" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="15.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+
+                <!-- Статус бейдж -->
+                <Label style="-fx-background-color: #0d2a1d; -fx-background-radius: 15; -fx-padding: 4 10 4 10;" text="● Активен" textFill="#00ff88">
+                    <font>
+                        <Font size="11.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+
+        <HBox style="-fx-background-color: #0f111a; -fx-background-radius: 8; -fx-padding: 12; -fx-border-color: #232a42; -fx-border-radius: 8;">
+            <children>
+                <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label text="Концертов" textFill="#8a99ad">
+                            <font>
+                                <Font size="10.0" />
+                            </font>
+                        </Label>
+                        <Label text="12 городов" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+                <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label text="Сборы (общие)" textFill="#8a99ad">
+                            <font>
+                                <Font size="10.0" />
+                            </font>
+                        </Label>
+                        <Label text="39 100 000 ₽" textFill="#00e5ff">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+
+        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleEditTour" style="-fx-background-color: #2a324b; -fx-text-fill: white; -fx-background-radius: 6px; -fx-padding: 6px 12px; -fx-cursor: hand;" text="✏ Редактировать" />
+                <Button mnemonicParsing="false" onAction="#handleDeleteTour" style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-background-radius: 6px; -fx-padding: 6px 12px; -fx-cursor: hand;" text="🗑 Удалить" />
+            </children>
+        </HBox>
+    </children>
+</VBox>
