@@ -107,3 +107,18 @@
 .scroll-pane > .corner {
     -fx-background-color: #0f111a;
 }
+
+/* Фиолетовое выделение узлов дерева экспорта PDF */
+.tree-view .tree-cell:filled:selected {
+    -fx-background-color: #7928ca;
+    -fx-text-fill: white;
+}
+
+.tree-view .tree-cell:filled:selected:focused {
+    -fx-background-color: #7928ca;
+    -fx-text-fill: white;
+}
+
+.tree-view .tree-cell:filled:selected:focused:hover {
+    -fx-background-color: #8d3cdb;
+}
