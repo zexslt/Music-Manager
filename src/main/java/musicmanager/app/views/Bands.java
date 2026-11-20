@@ -13,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import musicmanager.app.database.JpaSession;
 import musicmanager.app.models.MusicBand;
+import musicmanager.app.logging.AuditLog;
 
 import javax.persistence.EntityManager;
 import java.io.IOException;
@@ -31,10 +32,12 @@ public class Bands implements Initializable {
 
     @FXML
     private void handleAddBand() {
+        AuditLog.event("Открытие формы создания группы", java.util.Map.of());
         openBandForm(null);
     }
 
     private void editBand(MusicBand band) {
+        AuditLog.event("Открытие формы редактирования группы", java.util.Map.of("bandId", band.getId(), "name", band.getName()));
         openBandForm(band);
     }
 
@@ -51,6 +54,7 @@ public class Bands implements Initializable {
             AnchorPane.setLeftAnchor(pane, 0.0);
             AnchorPane.setRightAnchor(pane, 0.0);
         } catch (Exception e) {
+            AuditLog.failure("Ошибка открытия формы группы", java.util.Map.of("bandId", band == null ? "new" : band.getId()), e);
             showDatabaseError("Не удалось открыть форму группы", e);
         }
     }
@@ -62,16 +66,26 @@ public class Bands implements Initializable {
         confirm.setHeaderText("Удалить группу «" + band.getName() + "»?");
         confirm.setContentText("Вместе с группой будут удалены связанные музыканты, треки и туры.");
         if (confirm.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) return;
-
         EntityManager manager = null;
         try {
             manager = JpaSession.createEntityManager();
             manager.getTransaction().begin();
             MusicBand managedBand = manager.find(MusicBand.class, band.getId());
+            List<String> removedMusicians = managedBand == null ? List.of() : managedBand.getMusicians().stream()
+                    .map(item -> item.getId() + ":" + item.getName() + " " + item.getSurname()).toList();
+            List<String> removedTracks = managedBand == null ? List.of() : managedBand.getTracks().stream()
+                    .map(item -> item.getTrackId() + ":" + item.getName()).toList();
+            List<String> removedTours = managedBand == null ? List.of() : managedBand.getTours().stream()
+                    .map(item -> item.getId() + ":" + item.getStatus()).toList();
             if (managedBand != null) manager.remove(managedBand);
             manager.getTransaction().commit();
+            AuditLog.event("Удалена музыкальная группа", java.util.Map.of("bandId", band.getId(), "name", band.getName()));
+            removedMusicians.forEach(item -> AuditLog.event("Удален музыкант вместе с группой", java.util.Map.of("bandId", band.getId(), "musician", item)));
+            removedTracks.forEach(item -> AuditLog.event("Удален трек вместе с группой", java.util.Map.of("bandId", band.getId(), "track", item)));
+            removedTours.forEach(item -> AuditLog.event("Удален тур вместе с группой", java.util.Map.of("bandId", band.getId(), "tour", item)));
             loadBands();
         } catch (Exception e) {
+            AuditLog.failure("Ошибка удаления группы", java.util.Map.of("bandId", band.getId()), e);
             rollback(manager);
             showDatabaseError("Не удалось удалить группу", e);
         } finally {
@@ -99,7 +113,6 @@ public class Bands implements Initializable {
             manager = JpaSession.createEntityManager();
             List<MusicBand> result = manager.createQuery(
                     "SELECT b FROM MusicBand b ORDER BY b.name", MusicBand.class).getResultList();
-            // Initialize lazy relationships while the EntityManager is still open.
             for (MusicBand band : result) {
                 band.getMusicians().size();
                 band.getTracks().size();
@@ -164,6 +177,7 @@ public class Bands implements Initializable {
     }
 
     private void showDatabaseError(String header, Exception exception) {
+        AuditLog.failure("Ошибка интерфейса: " + header, java.util.Map.of("header", header), exception);
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Ошибка базы данных");
         alert.setHeaderText(header);

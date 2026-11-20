@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import musicmanager.app.database.CityService;
 import musicmanager.app.database.JpaSession;
 import musicmanager.app.models.City;
+import musicmanager.app.logging.AuditLog;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -32,6 +33,7 @@ public class CityForm {
     private void handleAddCity() {
         String name = cityNameField.getText().trim();
         if (name.isEmpty()) {
+            AuditLog.failure("Некорректное название города", java.util.Map.of("name", name), new IllegalArgumentException("Укажите название города."));
             showError("Укажите название города.");
             return;
         }
@@ -50,6 +52,7 @@ public class CityForm {
             manager.getTransaction().commit();
             saved = true;
         } catch (Exception e) {
+            AuditLog.failure("Ошибка добавления города", java.util.Map.of("name", name), e);
             if (manager != null && manager.isOpen() && manager.getTransaction().isActive()) manager.getTransaction().rollback();
             showError(e.getMessage() == null ? e.toString() : e.getMessage());
         } finally {
@@ -57,6 +60,7 @@ public class CityForm {
         }
 
         if (saved) {
+            if (!reused) AuditLog.event("Добавлен город", java.util.Map.of("cityId", city.getId(), "name", city.getName()));
             statusLabel.setText(reused
                     ? "Город уже существует. Используется запись с ID " + city.getId() + "."
                     : "Город добавлен, ID: " + city.getId() + ".");
@@ -72,6 +76,7 @@ public class CityForm {
             List<City> cities = manager.createQuery("SELECT c FROM City c ORDER BY c.name", City.class).getResultList();
             citiesList.setItems(FXCollections.observableArrayList(cities));
         } catch (Exception e) {
+            AuditLog.failure("Ошибка загрузки городов", java.util.Map.of(), e);
             showError(e.getMessage() == null ? e.toString() : e.getMessage());
         } finally {
             if (manager != null && manager.isOpen()) manager.close();

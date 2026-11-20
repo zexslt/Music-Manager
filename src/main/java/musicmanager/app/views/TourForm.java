@@ -21,6 +21,7 @@ import musicmanager.app.database.JpaSession;
 import musicmanager.app.models.City;
 import musicmanager.app.models.MusicBand;
 import musicmanager.app.models.Tour;
+import musicmanager.app.logging.AuditLog;
 
 import javax.persistence.EntityManager;
 import java.io.IOException;
@@ -125,13 +126,20 @@ public class TourForm {
     @FXML
     private void handleSave() {
         String status = statusField.getText().trim();
-        if (status.isEmpty()) { showError("Проверьте заполнение формы", "Укажите название или статус тура."); return; }
-        if (bandBox.getValue() == null) { showError("Проверьте заполнение формы", "Добавьте группу и выберите её для тура."); return; }
+        if (status.isEmpty()) {
+            AuditLog.failure("Некорректные данные тура", java.util.Map.of("field", "status"), new IllegalArgumentException("Укажите название или статус тура."));
+            showError("Проверьте заполнение формы", "Укажите название или статус тура."); return;
+        }
+        if (bandBox.getValue() == null) {
+            AuditLog.failure("Некорректные данные тура", java.util.Map.of("field", "band"), new IllegalArgumentException("Для тура нужно выбрать группу."));
+            showError("Проверьте заполнение формы", "Добавьте группу и выберите её для тура."); return;
+        }
         int revenue;
         try {
             revenue = Integer.parseInt(revenueField.getText().trim());
             if (revenue < 0) throw new NumberFormatException();
         } catch (RuntimeException e) {
+            AuditLog.failure("Некорректная выручка тура", java.util.Map.of("value", revenueField.getText()), e);
             showError("Проверьте заполнение формы", "Укажите неотрицательную выручку целым числом.");
             return;
         }
@@ -146,6 +154,7 @@ public class TourForm {
 
         EntityManager manager = null;
         boolean saved = false;
+        Tour savedTour = null;
         try {
             manager = JpaSession.createEntityManager();
             manager.getTransaction().begin();
@@ -172,14 +181,29 @@ public class TourForm {
                 tour.getCities().addAll(cities);
             }
             manager.getTransaction().commit();
+            savedTour = tour;
             saved = true;
         } catch (Exception e) {
+            AuditLog.failure("Ошибка сохранения тура", java.util.Map.of("status", statusField.getText()), e);
             rollback(manager);
             showError("Не удалось сохранить тур", errorMessage(e));
         } finally {
             if (manager != null && manager.isOpen()) manager.close();
         }
-        if (saved) navigateBack();
+        if (saved) {
+            int savedTourId = savedTour.getId();
+            AuditLog.event(originalTour == null ? "Добавлен тур" : "Отредактирован тур",
+                    java.util.Map.of("tourId", savedTourId, "status", status, "revenue", revenue,
+                            "bandId", bandBox.getValue().getId(), "cities", uniqueCityNames.values().toString()));
+            Set<String> oldCities = new java.util.HashSet<>();
+            if (originalTour != null) originalTour.getCities().forEach(city -> oldCities.add(city.getName()));
+            Set<String> newCities = new java.util.HashSet<>(uniqueCityNames.values());
+            newCities.stream().filter(city -> !oldCities.contains(city)).forEach(city ->
+                    AuditLog.event("Город добавлен в тур", java.util.Map.of("tourId", savedTourId, "city", city)));
+            oldCities.stream().filter(city -> !newCities.contains(city)).forEach(city ->
+                    AuditLog.event("Город удален из тура", java.util.Map.of("tourId", savedTourId, "city", city)));
+            navigateBack();
+        }
     }
 
     @FXML private void handleCancel() { navigateBack(); }

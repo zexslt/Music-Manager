@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import musicmanager.app.database.JpaSession;
 import musicmanager.app.models.MusicBand;
 import musicmanager.app.models.Tour;
+import musicmanager.app.logging.AuditLog;
 
 import javax.persistence.EntityManager;
 import java.io.IOException;
@@ -31,10 +32,12 @@ public class Tours implements Initializable {
 
     @FXML
     private void handleAddTour() {
+        AuditLog.event("Открытие формы создания тура", java.util.Map.of());
         showTourDialog(null);
     }
 
     private void editTour(Tour tour) {
+        AuditLog.event("Открытие формы редактирования тура", java.util.Map.of("tourId", tour.getId()));
         showTourDialog(tour);
     }
 
@@ -51,6 +54,7 @@ public class Tours implements Initializable {
             AnchorPane.setLeftAnchor(pane, 0.0);
             AnchorPane.setRightAnchor(pane, 0.0);
         } catch (Exception e) {
+            AuditLog.failure("Ошибка открытия формы тура", java.util.Map.of("tourId", tour == null ? "new" : tour.getId()), e);
             showDatabaseError("Не удалось открыть форму тура", e);
         }
     }
@@ -62,16 +66,20 @@ public class Tours implements Initializable {
         confirm.setHeaderText("Удалить тур «" + tour.getStatus() + "»?");
         confirm.setContentText("Запись тура и связи с городами будут удалены.");
         if (confirm.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) return;
-
         EntityManager manager = null;
         try {
             manager = JpaSession.createEntityManager();
             manager.getTransaction().begin();
             Tour managedTour = manager.find(Tour.class, tour.getId());
+            List<String> removedCities = managedTour == null ? List.of() : managedTour.getCities().stream()
+                    .map(city -> city.getId() + ":" + city.getName()).toList();
             if (managedTour != null) manager.remove(managedTour);
             manager.getTransaction().commit();
+            AuditLog.event("Удален тур", java.util.Map.of("tourId", tour.getId(), "status", String.valueOf(tour.getStatus())));
+            removedCities.forEach(city -> AuditLog.event("Удалена связь тура с городом", java.util.Map.of("tourId", tour.getId(), "city", city)));
             loadTours();
         } catch (Exception e) {
+            AuditLog.failure("Ошибка удаления тура", java.util.Map.of("tourId", tour.getId()), e);
             rollback(manager);
             showDatabaseError("Не удалось удалить тур", e);
         } finally {
@@ -142,6 +150,7 @@ public class Tours implements Initializable {
     }
 
     private void showDatabaseError(String header, Exception exception) {
+        AuditLog.failure("Ошибка интерфейса: " + header, java.util.Map.of("header", header), exception);
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Ошибка базы данных");
         alert.setHeaderText(header);

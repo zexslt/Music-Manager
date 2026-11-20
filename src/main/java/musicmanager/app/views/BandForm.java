@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
 import musicmanager.app.database.JpaSession;
 import musicmanager.app.models.MusicBand;
+import musicmanager.app.logging.AuditLog;
 import musicmanager.app.models.Musician;
 import musicmanager.app.models.Track;
 
@@ -127,12 +128,14 @@ public class BandForm {
         try {
             values = readValues();
         } catch (IllegalArgumentException e) {
+            AuditLog.failure("Некорректные данные музыкальной группы", java.util.Map.of("name", nameField.getText()), e);
             showError("Проверьте заполнение формы", e.getMessage());
             return;
         }
 
         EntityManager manager = null;
         boolean saved = false;
+        MusicBand savedBand = null;
         try {
             manager = JpaSession.createEntityManager();
             manager.getTransaction().begin();
@@ -155,14 +158,75 @@ public class BandForm {
                 synchronizeTracks(band, values.tracks);
             }
             manager.getTransaction().commit();
+            savedBand = band;
             saved = true;
         } catch (Exception e) {
+            AuditLog.failure("Ошибка сохранения музыкальной группы", java.util.Map.of("name", nameField.getText()), e);
             rollback(manager);
             showError("Не удалось сохранить группу", e.getMessage() == null ? e.toString() : e.getMessage());
         } finally {
             if (manager != null && manager.isOpen()) manager.close();
         }
-        if (saved) navigateBack();
+        if (saved) {
+            AuditLog.event(originalBand == null ? "Добавлена музыкальная группа" : "Отредактирована музыкальная группа",
+                    java.util.Map.of("bandId", savedBand.getId(), "name", values.name,
+                            "year", values.year, "topPosition", values.topPosition));
+            logMusicianChanges(savedBand, values.musicians);
+            logTrackChanges(savedBand, values.tracks);
+            navigateBack();
+        }
+    }
+
+    private void logMusicianChanges(MusicBand band, List<MusicianValues> values) {
+        Map<Integer, Musician> old = new HashMap<>();
+        if (originalBand != null) originalBand.getMusicians().forEach(item -> old.put(item.getId(), item));
+        Set<Integer> kept = new HashSet<>();
+        for (MusicianValues value : values) {
+            if (value.id == 0) {
+                Musician added = band.getMusicians().stream()
+                        .filter(item -> item.getName().equals(value.name) && item.getSurname().equals(value.surname))
+                        .findFirst().orElse(null);
+                AuditLog.event("Добавлен музыкант", java.util.Map.of("bandId", band.getId(), "name", value.name,
+                        "surname", value.surname, "age", value.age, "role", String.valueOf(value.role),
+                        "musicianId", added == null ? "unknown" : added.getId()));
+            } else {
+                kept.add(value.id);
+                Musician previous = old.get(value.id);
+                if (previous != null && (!previous.getName().equals(value.name) || !previous.getSurname().equals(value.surname)
+                        || previous.getAge() != value.age || !java.util.Objects.equals(previous.getRole(), value.role))) {
+                    AuditLog.event("Отредактирован музыкант", java.util.Map.of("musicianId", value.id,
+                            "oldName", previous.getName() + " " + previous.getSurname(), "newName", value.name + " " + value.surname,
+                            "age", value.age, "role", String.valueOf(value.role), "bandId", band.getId()));
+                }
+            }
+        }
+        old.values().stream().filter(item -> !kept.contains(item.getId())).forEach(item ->
+                AuditLog.event("Удален музыкант", java.util.Map.of("musicianId", item.getId(), "name",
+                        item.getName() + " " + item.getSurname(), "bandId", band.getId())));
+    }
+
+    private void logTrackChanges(MusicBand band, List<TrackValues> values) {
+        Map<Integer, Track> old = new HashMap<>();
+        if (originalBand != null) originalBand.getTracks().forEach(item -> old.put(item.getTrackId(), item));
+        Set<Integer> kept = new HashSet<>();
+        for (TrackValues value : values) {
+            if (value.id == 0) {
+                Track added = band.getTracks().stream().filter(item -> item.getName().equals(value.name))
+                        .findFirst().orElse(null);
+                AuditLog.event("Добавлен трек", java.util.Map.of("bandId", band.getId(), "name", value.name,
+                        "duration", value.duration, "genre", value.genre, "trackId", added == null ? "unknown" : added.getTrackId()));
+            } else {
+                kept.add(value.id);
+                Track previous = old.get(value.id);
+                if (previous != null && (!previous.getName().equals(value.name) || !previous.getDuration().equals(value.duration)
+                        || !previous.getGenre().equals(value.genre))) {
+                    AuditLog.event("Отредактирован трек", java.util.Map.of("trackId", value.id, "oldName", previous.getName(),
+                            "newName", value.name, "duration", value.duration, "genre", value.genre, "bandId", band.getId()));
+                }
+            }
+        }
+        old.values().stream().filter(item -> !kept.contains(item.getTrackId())).forEach(item ->
+                AuditLog.event("Удален трек", java.util.Map.of("trackId", item.getTrackId(), "name", item.getName(), "bandId", band.getId())));
     }
 
     private BandValues readValues() {

@@ -12,6 +12,7 @@ import musicmanager.app.models.MusicBand;
 import musicmanager.app.models.Musician;
 import musicmanager.app.models.Track;
 import musicmanager.app.models.Tour;
+import musicmanager.app.logging.AuditLog;
 
 import java.io.IOException;
 import java.text.NumberFormat;
@@ -75,6 +76,7 @@ public class BandInfo {
     @FXML
     private void handleEditBand() {
         if (band == null) return;
+        AuditLog.event("Открытие формы редактирования группы из карточки", java.util.Map.of("bandId", band.getId(), "name", band.getName()));
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("band_form.fxml"));
             AnchorPane pane = loader.load();
@@ -87,6 +89,7 @@ public class BandInfo {
             AnchorPane.setLeftAnchor(pane, 0.0);
             AnchorPane.setRightAnchor(pane, 0.0);
         } catch (IOException e) {
+            AuditLog.failure("Ошибка открытия формы редактирования группы", java.util.Map.of("bandId", band.getId()), e);
             showError("Не удалось открыть форму группы", e);
         }
     }

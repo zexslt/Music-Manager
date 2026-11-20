@@ -12,6 +12,7 @@ import musicmanager.app.database.JpaSession;
 import musicmanager.app.database.XmlBackupService;
 import musicmanager.app.database.PdfExportService;
 import musicmanager.app.models.MusicBand;
+import musicmanager.app.logging.AuditLog;
 
 import javax.persistence.EntityManager;
 import java.io.File;
@@ -64,6 +65,7 @@ public class Settings {
     private void handleExportPdf() {
         TreeItem<String> selected = pdfSelectionTree.getSelectionModel().getSelectedItem();
         if (selected == null) return;
+        AuditLog.event("Экспорт данных в PDF", java.util.Map.of("selection", selected.getValue()));
         BandTreeSelection bandSelection = bandTreeItems.get(selected);
         if (bandSelection != null) {
             exportPdf(file -> {
@@ -108,6 +110,7 @@ public class Settings {
             int records = writer.write(file);
             statusLabel.setText("PDF создан: " + records + " записей.\nФайл: " + file.getAbsolutePath());
         } catch (Exception e) {
+            AuditLog.failure("Ошибка экспорта PDF", java.util.Map.of("file", file.getAbsolutePath()), e);
             showError("Не удалось экспортировать данные в PDF", e);
         }
     }
@@ -126,10 +129,14 @@ public class Settings {
         try {
             manager = JpaSession.createEntityManager();
             XmlBackupService.ExportCounts counts = XmlBackupService.exportToXml(manager, file);
+            AuditLog.event("Экспортирована резервная копия XML", java.util.Map.of("file", file.getAbsolutePath(),
+                    "bands", counts.bands(), "musicians", counts.musicians(), "tracks", counts.tracks(),
+                    "tours", counts.tours(), "cities", counts.cities()));
             statusLabel.setText("Экспорт завершён: " + counts.bands() + " групп, " + counts.musicians()
                     + " музыкантов, " + counts.tracks() + " треков, " + counts.tours() + " туров, "
                     + counts.cities() + " городов.\nФайл: " + file.getAbsolutePath());
         } catch (Exception e) {
+            AuditLog.failure("Ошибка экспорта XML", java.util.Map.of("file", file.getAbsolutePath()), e);
             showError("Не удалось экспортировать данные", e);
         } finally {
             if (manager != null && manager.isOpen()) manager.close();
@@ -140,7 +147,6 @@ public class Settings {
     private void handleImportXml() {
         File file = xmlChooser("Импортировать данные из XML").showOpenDialog(owner());
         if (file == null) return;
-
         Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
         confirmation.initOwner(owner());
         confirmation.setTitle("Импорт XML");
@@ -154,10 +160,14 @@ public class Settings {
             manager.getTransaction().begin();
             XmlBackupService.ImportCounts counts = XmlBackupService.importFromXml(manager, file);
             manager.getTransaction().commit();
+            AuditLog.event("Импортирована резервная копия XML", java.util.Map.of("file", file.getAbsolutePath(),
+                    "bands", counts.bands(), "musicians", counts.musicians(), "tracks", counts.tracks(),
+                    "tours", counts.tours(), "cities", counts.cities()));
             statusLabel.setText("Импорт завершён: " + counts.bands() + " групп, " + counts.musicians()
                     + " музыкантов, " + counts.tracks() + " треков, " + counts.tours() + " туров, "
                     + counts.cities() + " городов.");
         } catch (Exception e) {
+            AuditLog.failure("Ошибка импорта XML", java.util.Map.of("file", file.getAbsolutePath()), e);
             if (manager != null && manager.isOpen() && manager.getTransaction().isActive()) {
                 manager.getTransaction().rollback();
             }

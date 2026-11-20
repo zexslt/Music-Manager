@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import musicmanager.app.database.JpaSession;
+import musicmanager.app.logging.AuditLog;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +19,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        AuditLog.event("Запуск приложения", java.util.Map.of());
         try {
             URL fxmlUrl = getClass().getResource("/musicmanager/app/views/main_window.fxml");
 
